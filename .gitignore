@@ -6,3 +6,7 @@
 /TestMicrosoftPing/bin/Debug/net10.0
 /TestMicrosoftPing/obj/Debug/net10.0
 /TestMicrosoftPing/obj
+/TestMicrosoftPing/appsettings.json
+/.vs/TestMicrosoftPing/CopilotIndices/18.0.923.20550
+/MicrosoftPingService/bin/Debug/net10.0
+/MicrosoftPingService/obj
