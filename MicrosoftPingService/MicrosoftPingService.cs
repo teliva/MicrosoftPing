@@ -12,7 +12,7 @@ namespace Services
             _webHookURL = webHookURL;
         }
 
-        public async Task<bool> Ping(string message)
+        public async Task<bool> Ping(string stackTrace)
         {
             using var httpClient = new HttpClient();
 
