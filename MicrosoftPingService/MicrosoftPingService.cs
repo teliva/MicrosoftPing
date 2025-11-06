@@ -12,21 +12,17 @@ namespace Services
             _webHookURL = webHookURL;
         }
 
-        public async void Ping(string message)
+        public async Task<bool> Ping(string message)
         {
             using var httpClient = new HttpClient();
 
-            // Teams expects valid JSON. For simple text messages, use this:
-            string jsonPayload = "{ \"text\": \"Hello from C#!\" }";
+            string jsonPayload = "{\r\n    \"type\": \"message\",\r\n    \"attachments\": [\r\n        {\r\n            \"contentType\": \"application/vnd.microsoft.card.adaptive\",\r\n            \"contentUrl\": null,\r\n            \"content\": {\r\n                \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\r\n                \"type\": \"AdaptiveCard\",\r\n                \"version\": \"1.2\",\r\n                \"body\": [\r\n                    {\r\n                        \"type\": \"TextBlock\",\r\n                        \"text\": \"For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)\"\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}";
 
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync(_webHookURL, content);
 
-            if (response.IsSuccessStatusCode)
-                Console.WriteLine("Message sent successfully!");
-            else
-                Console.WriteLine($"Error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}");
+            return response.IsSuccessStatusCode;
         }
     }
 }

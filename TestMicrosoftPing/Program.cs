@@ -25,4 +25,4 @@ var host = Host.CreateDefaultBuilder(args)
 
 var pingService = host.Services.GetRequiredService<MicrosoftPingService>();
 
-pingService.Ping("tilt");
+var ret = await pingService.Ping("ping ivan");
